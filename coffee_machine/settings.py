@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # Local app
-    "cafe",
+    "cafe.apps.CafeConfig",
 ]
 
 MIDDLEWARE = [
