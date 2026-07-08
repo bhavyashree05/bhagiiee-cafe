@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 
 from django.conf import settings
@@ -48,6 +49,12 @@ class CoffeeItem(models.Model):
 
     def __str__(self):
         return f"{self.name} (₹{self.price})"
+    @property
+    def static_image(self):
+        if self.image:
+           filename = os.path.basename(self.image.name)
+           return f"cafe/images/{filename}"
+        return "cafe/images/espresso.png"
 
     @property
     def in_stock(self):
