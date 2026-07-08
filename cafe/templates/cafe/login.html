@@ -1,0 +1,48 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <img src="{% static 'cafe/images/cafelogo.png' %}" alt="Bhagiiee Cafe" class="auth-logo">
+
+        <h1>Welcome Back</h1>
+
+        <p class="muted">
+            Sign in to continue.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <p class="auth-link">
+
+            Don't have an account?
+
+            <a href="{% url 'register' %}">
+
+                Register
+
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

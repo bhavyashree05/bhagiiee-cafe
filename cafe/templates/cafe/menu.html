@@ -1,0 +1,100 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}Coffee Menu{% endblock %}
+
+{% block content %}
+
+<div class="hero-section">
+    <h1>☕ Coffee Menu</h1>
+    <p>Freshly brewed coffee made with love. Choose your favorite and enjoy every sip.</p>
+</div>
+
+{% if items %}
+<div class="grid">
+
+{% for item in items %}
+
+<div class="card coffee-card">
+
+    <div class="image-wrapper">
+
+        {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image">
+        {% else %}
+            <img src="{% static 'cafe/images/espresso.png' %}" class="item-image" alt="{{ item.name }}">
+        {% endif %}
+
+        {% if item.in_stock %}
+            <span class="stock-badge available">
+                In Stock
+            </span>
+        {% else %}
+            <span class="stock-badge unavailable">
+                Out of Stock
+            </span>
+        {% endif %}
+
+    </div>
+
+    <div class="coffee-details">
+
+        <h2>{{ item.name }}</h2>
+
+        {% if item.description %}
+        <p class="muted">
+            {{ item.description }}
+        </p>
+        {% endif %}
+
+        <div class="price-stock">
+
+            <span class="price">
+                ₹{{ item.price }}
+            </span>
+
+            {% if item.in_stock %}
+                <span class="stock ok">
+                    {{ item.stock }} Cups Left
+                </span>
+            {% endif %}
+
+        </div>
+
+        {% if item.in_stock %}
+
+        <a href="{% url 'place_order' item.id %}" class="btn order-btn">
+            ☕ Order Now
+        </a>
+
+        {% else %}
+
+        <button class="btn disabled" disabled>
+            Currently Unavailable
+        </button>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="card centered">
+
+<h2>No Coffee Available</h2>
+
+<p class="muted">
+Please check back later.
+</p>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

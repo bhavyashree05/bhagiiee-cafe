@@ -1,0 +1,22 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="card centered">
+    <img src="{% static 'cafe/images/cafelogo.png' %}" alt="Bhagiiee Cafe" class="auth-logo">
+    <h2>Create Account</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-field">
+                {{ field }}
+                {% for error in field.errors %}
+                    <p class="field-error">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+</div>
+{% endblock %}

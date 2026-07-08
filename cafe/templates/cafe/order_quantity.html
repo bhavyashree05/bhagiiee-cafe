@@ -1,0 +1,70 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}Choose Quantity{% endblock %}
+
+{% block content %}
+
+<div class="order-container">
+
+    <div class="card quantity-card">
+
+        <div class="coffee-header">
+
+            <h1>☕ {{ item.name }}</h1>
+
+            <p class="muted">
+                Choose how many cups you'd like to order.
+            </p>
+
+        </div>
+
+        <div class="coffee-info">
+
+            <div class="info-box">
+                <span class="label">Price</span>
+                <span class="value price">₹{{ item.price }}</span>
+            </div>
+
+            <div class="info-box">
+                <span class="label">Available</span>
+                <span class="value stock ok">{{ item.stock }} Cups</span>
+            </div>
+
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-field">
+
+                <label for="id_quantity">
+                    Quantity
+                </label>
+
+                {{ form.quantity }}
+
+            </div>
+
+            <button type="submit" class="btn order-btn">
+                Continue to Payment →
+            </button>
+
+        </form>
+
+        <div class="back-link">
+
+            <a href="{% url 'menu' %}" class="btn secondary">
+
+                ← Back to Menu
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

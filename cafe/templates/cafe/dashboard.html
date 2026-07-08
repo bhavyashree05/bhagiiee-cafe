@@ -1,0 +1,279 @@
+{% extends "cafe/base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="hero-section dashboard-hero">
+
+    <h1>📊 Coffee Shop Dashboard</h1>
+
+    <p>
+        Welcome back, Admin! Here's today's business overview.
+    </p>
+
+</div>
+
+<!-- Statistics -->
+
+<div class="grid stats">
+
+    <div class="card stat-card revenue">
+
+        <div class="stat-icon">💰</div>
+
+        <div>
+
+            <h2>₹{{ summary.total_revenue }}</h2>
+
+            <p>Total Revenue</p>
+
+        </div>
+
+    </div>
+
+    <div class="card stat-card orders">
+
+        <div class="stat-icon">🧾</div>
+
+        <div>
+
+            <h2>{{ summary.total_orders }}</h2>
+
+            <p>Paid Orders</p>
+
+        </div>
+
+    </div>
+
+    <div class="card stat-card stock">
+
+        <div class="stat-icon">📦</div>
+
+        <div>
+
+            <h2>{{ low_stock_items|length }}</h2>
+
+            <p>Low Stock Items</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Top Selling -->
+
+<div class="card">
+
+    <h2>🏆 Top Selling Coffee</h2>
+
+    <table class="table">
+
+        <thead>
+
+        <tr>
+
+            <th>☕ Coffee</th>
+
+            <th>Units Sold</th>
+
+            <th>Revenue</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for row in summary.top_items %}
+
+        <tr>
+
+            <td>{{ row.coffee_item__name }}</td>
+
+            <td>{{ row.units_sold }}</td>
+
+            <td>₹{{ row.revenue }}</td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="3" style="text-align:center">
+
+                No sales yet
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<br>
+
+<!-- Low Stock -->
+
+<div class="card">
+
+<h2>⚠️ Low Stock Alerts</h2>
+
+<table class="table">
+
+<thead>
+
+<tr>
+
+<th>Coffee</th>
+
+<th>Remaining Stock</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for item in low_stock_items %}
+
+<tr>
+
+<td>{{ item.name }}</td>
+
+<td>
+
+{% if item.stock <= 5 %}
+
+<span class="badge cancelled">
+
+{{ item.stock }}
+
+</span>
+
+{% else %}
+
+<span class="badge paid">
+
+{{ item.stock }}
+
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="2" style="text-align:center">
+
+Everything is fully stocked ☕
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+<br>
+
+<!-- Recent Orders -->
+
+<div class="card">
+
+<h2>🕒 Recent Orders</h2>
+
+<table class="table">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Customer</th>
+
+<th>Coffee</th>
+
+<th>Qty</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for order in recent_orders %}
+
+<tr>
+
+<td>#{{ order.id }}</td>
+
+<td>{{ order.user.username }}</td>
+
+<td>{{ order.coffee_item.name }}</td>
+
+<td>{{ order.quantity }}</td>
+
+<td>
+
+<span class="badge {{ order.status|lower }}">
+
+{{ order.get_status_display }}
+
+</span>
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="5" style="text-align:center">
+
+No recent orders
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+<div style="margin-top:35px;text-align:center;">
+
+<a href="{% url 'admin:index' %}" class="btn">
+
+⚙️ Open Django Admin
+
+</a>
+
+</div>
+
+{% endblock %}

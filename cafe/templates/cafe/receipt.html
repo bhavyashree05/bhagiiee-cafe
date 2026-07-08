@@ -1,0 +1,112 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}Receipt{% endblock %}
+
+{% block content %}
+
+<div class="receipt-container">
+
+    <div class="card receipt-card">
+
+        <div class="receipt-header">
+
+            <img src="{% static 'cafe/images/cafelogo.png' %}" alt="Bhagiiee Cafe" class="auth-logo">
+
+            <h1>Bhagiiee Cafe</h1>
+
+            <p>Brewing Happiness, One Cup at a Time</p>
+
+        </div>
+
+        <hr>
+
+        <h2 style="text-align:center;">
+            Payment Successful ✅
+        </h2>
+
+        <div class="receipt-details">
+
+            <div class="receipt-row">
+                <span>Receipt ID</span>
+                <strong>#{{ payment.id }}</strong>
+            </div>
+
+            <div class="receipt-row">
+                <span>Order ID</span>
+                <strong>#{{ order.id }}</strong>
+            </div>
+
+            <div class="receipt-row">
+                <span>Coffee</span>
+                <strong>{{ order.coffee_item.name }}</strong>
+            </div>
+
+            <div class="receipt-row">
+                <span>Quantity</span>
+                <strong>{{ order.quantity }}</strong>
+            </div>
+
+            <div class="receipt-row">
+                <span>Price / Cup</span>
+                <strong>₹{{ order.unit_price }}</strong>
+            </div>
+
+            <div class="receipt-row">
+                <span>Total Paid</span>
+                <strong>₹{{ payment.amount_paid }}</strong>
+            </div>
+
+            <div class="receipt-row">
+                <span>Payment Status</span>
+                <span class="badge paid">
+                    Paid
+                </span>
+            </div>
+
+            <div class="receipt-row">
+                <span>Date</span>
+                <strong>{{ payment.payment_time }}</strong>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="thank-you">
+
+            ❤️ Thank You For Visiting ❤️
+
+            <br><br>
+
+            We hope to see you again soon.
+
+        </div>
+
+        <div class="receipt-buttons">
+
+            <button onclick="window.print()" class="btn">
+
+                🖨 Print Receipt
+
+            </button>
+
+            <a href="{% url 'menu' %}" class="btn secondary">
+
+                ☕ Order Again
+
+            </a>
+
+            <a href="{% url 'order_history' %}" class="btn">
+
+                📜 Order History
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

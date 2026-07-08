@@ -1,0 +1,108 @@
+{% extends "cafe/base.html" %}
+{% load static %}
+
+{% block title %}Bhagiiee Cafe — Home{% endblock %}
+
+{% block content %}
+
+<section class="hero-banner">
+    <img src="{% static 'cafe/images/bg_cafe.png' %}" alt="" class="hero-banner-bg">
+    <div class="hero-banner-overlay"></div>
+
+    <div class="hero-banner-inner">
+
+        <div class="hero-text">
+
+            <span class="eyebrow">Bhagiiee Cafe</span>
+
+            <h1>Fresh Coffee.<br>Fresh Start.</h1>
+
+            <p>
+                Handcrafted coffee made from premium, freshly roasted beans.
+                Order your favourite drink in just a few clicks and skip the queue.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{% url 'menu' %}" class="btn">
+                    Explore Menu
+                </a>
+
+                <a href="{% url 'order_history' %}" class="btn secondary">
+                    My Orders
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+            <img src="{% static 'cafe/images/latte.png' %}" alt="Signature latte">
+        </div>
+
+    </div>
+</section>
+
+<section>
+
+<h2 class="section-title">Why Choose Us?</h2>
+
+<div class="grid">
+
+<div class="card feature-card">
+<div class="feature-icon">🌱</div>
+<h2>Premium Beans</h2>
+<p class="muted">
+Freshly roasted beans sourced from trusted farms, ground right before brewing.
+</p>
+</div>
+
+<div class="card feature-card">
+<div class="feature-icon">⚡</div>
+<h2>Fast Service</h2>
+<p class="muted">
+Quick preparation and a smooth, no-fuss ordering flow from cup to counter.
+</p>
+</div>
+
+<div class="card feature-card">
+<div class="feature-icon">💳</div>
+<h2>Secure Payment</h2>
+<p class="muted">
+Safe, simple checkout with a clear receipt for every order you place.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section style="margin-top:60px;">
+
+<h2 class="section-title">Customer Favorites</h2>
+
+<div class="grid favorites-grid">
+
+<div class="card favorite-card">
+    <img src="{% static 'cafe/images/latte.png' %}" alt="Latte" class="favorite-image">
+    <h2>Latte</h2>
+    <p class="muted">Espresso with silky steamed milk</p>
+</div>
+
+<div class="card favorite-card">
+    <img src="{% static 'cafe/images/cappuccino.png' %}" alt="Cappuccino" class="favorite-image">
+    <h2>Cappuccino</h2>
+    <p class="muted">Espresso with steamed milk foam</p>
+</div>
+
+<div class="card favorite-card">
+    <img src="{% static 'cafe/images/caramel_frappe.png' %}" alt="Caramel Frappe" class="favorite-image">
+    <h2>Caramel Frappe</h2>
+    <p class="muted">Blended, iced, and drizzled with caramel</p>
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "cafe/base.html" %}
+{% block title %}My Orders{% endblock %}
+{% block content %}
+<h2 class="page-title">📋 My Order History</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order #</th>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.coffee_item.name }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>₹{{ order.total_amount }}</td>
+            <td><span class="badge {{ order.status|lower }}">{{ order.get_status_display }}</span></td>
+            <td>{{ order.created_at|date:"d M Y, H:i" }}</td>
+            <td>
+                {% if order.status == "PAID" %}
+                    <a href="{% url 'receipt' order.id %}">Receipt</a>
+                {% elif order.status == "PENDING" %}
+                    <a href="{% url 'payment' order.id %}">Pay Now</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="7">You haven't placed any orders yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
