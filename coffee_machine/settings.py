@@ -7,6 +7,7 @@ matching MySQL database has been created in MySQL Workbench).
 """
 
 import os
+import dj_database_url
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
