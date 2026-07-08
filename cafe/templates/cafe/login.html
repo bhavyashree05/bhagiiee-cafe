@@ -17,17 +17,18 @@
             Sign in to continue.
         </p>
 
-        <form method="POST">
+       <form method="POST">
+    {% csrf_token %}
 
-            {% csrf_token %}
+    <input type="text" name="username" placeholder="Username" required>
 
-            {{ form.as_p }}
+    <input type="password" name="password" placeholder="Password" required>
 
-            <button type="submit">
-                Login
-            </button>
+    <button type="submit">
+        Login
+    </button>
 
-        </form>
+</form>
 
         <p class="auth-link">
 
