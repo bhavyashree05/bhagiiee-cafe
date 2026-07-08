@@ -15,10 +15,7 @@ SECRET_KEY = "django-insecure-change-this-key-before-deploying"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get(
-    "DJANGO_ALLOWED_HOSTS",
-    "127.0.0.1,localhost,bhagiiee-cafe-2.onrender.com"
-).split(",")
+ALLOWED_HOSTS = ["*"]
 
 
 
