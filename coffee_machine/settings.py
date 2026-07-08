@@ -21,7 +21,7 @@ SECRET_KEY = os.environ.get(
     "dev-only-secret-key-change-this-before-deploying",
 )
 
-DEBUG == "false"
+DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "True"
 ALLOWED_HOSTS = ["*"]
 
 
