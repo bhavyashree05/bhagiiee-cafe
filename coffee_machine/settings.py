@@ -80,17 +80,9 @@ WSGI_APPLICATION = "coffee_machine.wsgi.application"
 # 2. Either edit the defaults directly, or set these environment variables
 #    before running manage.py: DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get("DB_NAME", "coffee_machine_db"),
-        "USER": os.environ.get("DB_USER", "root"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", ""),
-        "HOST": os.environ.get("DB_HOST", "127.0.0.1"),
-        "PORT": os.environ.get("DB_PORT", "3306"),
-        "OPTIONS": {
-            "charset": "utf8mb4",
-        },
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL")
+    )
 }
 
 # --------------------------------------------------------------------------
